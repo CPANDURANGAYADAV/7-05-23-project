@@ -1,0 +1,64 @@
+#for connector
+import mysql.connector
+mydb=mysql.connector.connect(host='localhost',user='root',password='Lqsudnap@54321')
+print(mydb.connection_id)
+cur=mydb.cursor()
+cur.execute('create database Ivnentory_management')
+print("success")
+
+# for creating manufature table
+mydb=mysql.connector.connect(host='localhost',user='root',password='Lqsudnap@54321',database='Ivnentory_management')
+cur=mydb.cursor()
+t="create table manufacture(manufature_id int primary key not null,product_item_name varchar(30),stock int(10),manufacture_date date,manufature_costperuni_item  float)"
+cur.execute(t)
+print("success")
+z='insert into manufacture values(%s,%s,%s,%s,%s)'
+a=[('34212','wooden chair','120','2022-03-04','300.00'),('34213','wooden table','120','2023-05-01','500.00'),('34214','red colored toy','500','2023-02-20','40.00'),('34215','wooden chair','150','2023-04-02','350.00'),('34216','tshirt','400','2023-04-01','50.00')]
+cur.executemany(z,a)
+mydb.commit()
+print("success")
+  
+#for creating goods table
+import mysql.connector
+mydb=mysql.connector.connect(host='localhost',user='root',password='Lqsudnap@54321',database='Ivnentory_management')
+cur=mydb.cursor()
+t="create table goods(goods_id int(10),material varchar(30),material_status varchar(30),manufacture_date date,stock varchar(50),cost_peruniitem float)"
+cur.execute(t)
+print("success")
+z='insert into goods values(%s,%s,%s,%s,%s,%s)'
+a=[('24209','cotton','raw material','2023-01-01','80 kgs','25.00'),('24214','red colored toy','manufactured','2023-02-20','200','40.00'),('34216','tshirt','manufactured','2023-04-01','100','50.00')]
+cur.executemany(z,a)
+mydb.commit()
+print("success")
+
+#for creating purchase table
+import mysql.connector
+mydb=mysql.connector.connect(host='localhost',user='root',password='Lqsudnap@54321',database='Ivnentory_management')
+cur=mydb.cursor()
+t="create table purchase(purchase_id int(10),material varchar(30),purchase_date date,purchase_mode varchar(50),purchase_store varchar(30),stock varchar(50),cost_peruniitem float)"
+cur.execute(t)
+z='insert into purchase values(%s,%s,%s,%s,%s,%s,%s)'
+a=[('14209','cotton','2023-01-07','Offline','Rkcotton store','900 kgs','15.00'),('14214','red colore for toys','2023-02-12','online','softcolors','70','10.00'),('14212','wooden table','2022-02-25','offline','SS Export','120','400.00')]
+cur.executemany(z,a)
+mydb.commit()
+print("success")
+
+#crating a table for sales
+import mysql.connector
+mydb=mysql.connector.connect(host='localhost',user='root',password='Lqsudnap@54321',database='Ivnentory_management')
+cur=mydb.cursor()
+t="create table sale(sales_id int(10),material varchar(30),sale_date date,sale_mode varchar(50),purchased_store varchar(30),stock varchar(50),cost_peruniitem float)"
+cur.execute(t)
+print("success")
+cur=mydb.cursor()
+z='insert into purchase values(%s,%s,%s,%s,%s,%s,%s)'
+a=[('44201','wooden chair','2022-03-25','Offline','Ravi wooden store','120','800'), ('44214','red color toys','2023-02-28','online','smailykid','300','60.00'),('14216','tshirt','2023-04-23','online','ORay','300','70.00'),('142115','wooden chair','2023-04-18','offline','Ravi wooden store','150','500'),('142113','wooden table','2023-6-1','offline','Ravi wooden store','120','1200')]
+cur.executemany(z,a)
+mydb.commit()
+print("success")
+import mysql.connector
+mydb=mysql.connector.connect(host='localhost',user='root',password='Lqsudnap@54321',database='Ivnentory_management')
+cur=mydb.cursor()
+t="update sale  set stock = stock where purchased_store='ORay' "
+cur.execute(t)
+print("success")
